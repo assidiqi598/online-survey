@@ -1,0 +1,82 @@
+body {
+  overflow-x: hidden;
+}
+
+.nav {
+  background: -webkit-linear-gradient(left, #555cff, #892cdc);
+  height: 40pt;
+}
+
+.nav-link:hover {
+  color: #b224ef
+}
+
+.nav-link {
+  font-weight: 100;
+  color: white;
+  font-size: 16pt;
+}
+
+.dropdown-menu {
+  background: #555cff;
+}
+
+.brand {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18pt;
+  font-weight: 200;
+  padding: 0;
+  margin: auto auto auto 15px;
+  color: white;
+}
+
+.brand:hover {
+  color: #b224ef;
+}
+
+body {
+  margin: 0;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+  background-image:url("https://cdn.pixabay.com/photo/2016/03/27/07/32/light-1282314_960_720.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+  border-radius: 20px;
+  width: 500px;
+  margin: auto;
+  height: 600px;
+}
+
+.about-section {
+  padding: 50px;
+  text-align: left;
+
+  color: black;
+}
+
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}

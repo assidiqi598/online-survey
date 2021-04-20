@@ -1,0 +1,66 @@
+<%- include("partials/header") -%>
+
+<link rel="stylesheet" type="text/css" href="/css/surveysstyles.css">
+
+
+</head>
+
+<body>
+
+  <nav class="nav justify-content-end header sticky">
+    <span class="navbar-brand brand">Online Survey</span>
+    <div class="hamburger">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+    <ul class="links">
+      <li class="nav-item">
+        <a class="nav-link active" href="/<%=lang%>/<%=user._id%>/surveys">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/<%=lang%>/about"><%=version.about%></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-user-circle"></i>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a id="logout" class="dropdown-item nav-link" href="/<%=lang%>/logout/<%=user._id%>"><%=version.logout%></a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <%=version.toggle%>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item nav-link" href="/en/<%=user._id%>/surveys">EN</a></li>
+          <li><a class="dropdown-item nav-link" href="/de/<%=user._id%>/surveys">DE</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="row">
+    <div class="col leftcol">
+      <div class="surveylist">
+        <% user.surveys.forEach(survey => { %>
+          <form class="" action="/<%=lang%>/edit/<%=user._id%>/<%=survey._id%>" method="post">
+            <button href="" class="surveytitle btn"><%=survey.title%></button>
+          </form>
+        <% }) %>
+      </div>
+    </div>
+    <div class="col rightcol">
+      <form class="" action="/<%=lang%>/<%=user._id%>/surveys/addsurvey" method="post">
+        <button type="submit" name="button" class="createnewbtn btn"><i class="fas fa-plus-square fa-7x plusicon"></i><p><%=version.createnew%></p></button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/javascript/surveysscript.js" charset="utf-8"></script>
+</body>
+
+
+<%- include("partials/footer") -%>

@@ -1,0 +1,539 @@
+body {
+  overflow-x: hidden;
+}
+
+.nav {
+  background: -webkit-linear-gradient(left, #555cff, #892cdc);
+  height: 40pt;
+}
+
+.nav-link:hover {
+  color: #b224ef
+}
+
+.nav-link {
+  font-weight: 100;
+  color: white;
+  font-size: 16pt;
+}
+
+.dropdown-menu {
+  background: #555cff;
+}
+
+.brand {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18pt;
+  font-weight: 200;
+  padding: 0;
+  margin: auto auto auto 15px;
+  color: white;
+}
+
+.brand:hover {
+  cursor: default;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 7;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+.sticky+.row {
+  padding-top: 80px;
+}
+
+.warning {
+  padding: 37pt 20pt 0;
+  background: #ff577f;
+  z-index: 6;
+}
+
+.msg {
+  color: white;
+  font-weight: 500;
+  font-size: 14pt;
+  margin-top: 6pt;
+}
+
+.msganswer {
+  color: white;
+  font-weight: 500;
+  font-size: 14pt;
+  margin-bottom: 5pt;
+}
+
+.msganswer:hover {
+  background: #555cff;
+  color: yellow;
+}
+
+.leftmenudiv {
+  position: fixed;
+  left: 30pt;
+  top: 23%;
+  width: 20%;
+  background-color: #bedcfa;
+  border-radius: 10pt;
+  z-index: 3;
+}
+
+.leftmenu {
+  margin: 2% 10%;
+  padding: 2%;
+  background-color: #33b5e5;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10pt;
+  font-size: 18pt;
+  border: none;
+  color: white;
+  width: 80%;
+}
+
+.leftmenu:hover {
+  background-color: #0099cc;
+  color: white;
+}
+
+.asidetop {
+  position: fixed;
+  top: 19%;
+  right: 20pt;
+  width: 20%;
+  background-color: #bedcfa;
+  padding: 15px;
+  margin-right: 10pt;
+  color: #ffffff;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 10pt;
+  height: 30%;
+  overflow-y: auto;
+  z-index: 3;
+}
+
+.asidebottom {
+  position: fixed;
+  top: 50%;
+  right: 20pt;
+  width: 20%;
+  background-color: #bedcfa;
+  padding: 15px;
+  margin-right: 10pt;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 10pt;
+  height: 30%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 3;
+}
+
+@media only screen and (max-device-width: 768px) {
+  .asidetop {
+    top: 10%;
+    height: 27%;
+  }
+
+  .asidebottom {
+    top: 41%;
+    height: 27%;
+  }
+}
+
+.uploadtext {
+  color: #555cff;
+  font-weight: bold;
+  font-size: 18pt;
+  margin-bottom: 10pt;
+}
+
+.uploaddiv {
+  margin-bottom: 5pt;
+}
+
+.uploadnumber {
+  color: #555cff;
+  font-weight: 600;
+}
+
+.surveylist {
+  background: -webkit-linear-gradient(left, #555cff, #892cdc);
+  border-radius: 10pt;
+  border-width: 3;
+  border-color: #b224ef;
+  text-align: center;
+  color: white;
+  width: 80%;
+  font-weight: 600;
+  font-size: 16pt;
+  margin: 3% 0;
+}
+
+@media only screen and (max-width: 1500px) {
+  .surveylist {
+    font-size: 12pt;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .surveylist {
+    font-size: 12pt;
+  }
+}
+
+.surveylist:hover {
+  background: -webkit-linear-gradient(left, #892cdc, #555cff);
+}
+
+.fileinput {
+  margin-left: 2pt;
+}
+
+.footer {
+  background: linear-gradient(to left, #33ccff 0%, #9933cc 100%);
+  color: #ffffff;
+  text-align: center;
+  font-size: 30px;
+  padding: 15px;
+  margin: 650px 0px 0px 0px;
+  height: 10%;
+}
+
+.footerpar {
+  margin-top: 20pt;
+}
+
+/*Title class form*/
+.title {
+  background-color: #bedcfa;
+  border-radius: 15px;
+  padding: 10pt;
+}
+
+.questiondiv {
+  position: relative;
+  background-color: #bedcfa;
+  border-radius: 15px;
+  margin: 20px 0 0 0;
+  padding: 10pt;
+}
+
+.inputtext {
+  border-radius: 20pt;
+  border-color: #892cdc;
+  outline: #892cdc;
+  padding: 10pt;
+  font-size: 12pt;
+}
+
+.questiontextarea {
+  width: 100%;
+  font-size: 14pt;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.combo {
+  border-radius: 10px;
+  font-size: 18px;
+  padding: 6px;
+  margin: 11px 0px 10px 0px;
+  width: 100%
+}
+
+.labels {
+  font-size: 28px;
+  font-family: monospace;
+}
+
+.survey-title-input {
+  width: 100%;
+  font-size: 20pt;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.survey-description-input {
+  width: 100%;
+  font-size: 16pt;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.butSubmit {
+  background-color: #33b5e5;
+  margin: 5px 0px 0px 380px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.butNewAnswer {
+  background-color: #33b5e5;
+  margin: 5px 0 0 0;
+  border-radius: 5px;
+}
+
+.butNewForm {
+  background-color: #33b5e5;
+  margin: 5px 0 0 0;
+  border-radius: 5px;
+}
+
+@media only screen and (min-width: 600px) {
+
+  /* For tablets: */
+  .col-s-1 {
+    width: 8.33%;
+  }
+
+  .col-s-2 {
+    width: 16.66%;
+  }
+
+  .col-s-3 {
+    width: 25%;
+  }
+
+  .col-s-4 {
+    width: 33.33%;
+  }
+
+  .col-s-5 {
+    width: 41.66%;
+  }
+
+  .col-s-6 {
+    width: 50%;
+  }
+
+  .col-s-7 {
+    width: 58.33%;
+  }
+
+  .col-s-8 {
+    width: 66.66%;
+  }
+
+  .col-s-9 {
+    width: 75%;
+  }
+
+  .col-s-9-1 {
+    width: 75%;
+  }
+
+  .col-s-10 {
+    width: 83.33%;
+  }
+
+  .col-s-11 {
+    width: 91.66%;
+  }
+
+  .col-s-12 {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+
+  /* For desktop: */
+  .col-1 {
+    width: 8.33%;
+  }
+
+  .col-2 {
+    width: 16.66%;
+  }
+
+  .col-3 {
+    width: 25%;
+  }
+
+  .col-4 {
+    width: 33.33%;
+  }
+
+  .col-5 {
+    width: 41.66%;
+  }
+
+  .col-6 {
+    width: 50%;
+  }
+
+  .col-6-1 {
+    width: 50%;
+  }
+
+  .col-7 {
+    width: 58.33%;
+  }
+
+  .col-8 {
+    width: 66.66%;
+  }
+
+  .col-9 {
+    width: 75%;
+  }
+
+  .col-10 {
+    width: 83.33%;
+  }
+
+  .col-11 {
+    width: 91.66%;
+  }
+
+  .col-12 {
+    width: 100%;
+  }
+}
+
+.deletequestioncheckbox {
+  display: none;
+  position: absolute;
+  right: 10pt;
+}
+
+.delbutton {
+  position: absolute;
+  right: 10pt;
+  background: #555cff;
+  border-color: #b224ef;
+  border-radius: 5pt;
+  border: 2pt solid;
+  color: #b224ef;
+}
+
+.delbutton:hover {
+  background: #cc0e74;
+}
+
+.delp {
+  font-size: 20pt;
+  font-weight: 600;
+  padding: 0 5pt;
+  margin-bottom: -2pt;
+  margin-top: -7pt;
+  color: white;
+}
+
+.delimgbtn {
+  position: relative;
+  margin-top: 10pt;
+  left: 49%;
+  background: #555cff;
+  border-color: #b224ef;
+  border-radius: 25pt;
+  border: 2pt solid;
+  color: #b224ef;
+}
+
+.addanswerbutton {
+  margin: 10pt 5pt 15pt auto;
+  color: white;
+  background: -webkit-linear-gradient(left, #555cff, #892cdc);
+  border-width: 1pt;
+  border-radius: 20pt;
+  border-color: #b224ef;
+  padding: 5pt;
+  width: 170pt;
+}
+
+.addanswerbutton:hover {
+  background: -webkit-linear-gradient(left, #892cdc, #555cff);
+}
+
+.form-check-input {
+  margin-top: 25pt;
+}
+
+.form-check-label {
+  width: 80%;
+  border-radius: 5pt;
+}
+
+.switchtext {
+  position: relative;
+  margin-left: -40pt;
+  color: #555cff;
+  font-weight: bold;
+}
+
+.delansbtn {
+  position: relative;
+  bottom: 30pt;
+  left: 3pt;
+  background: #555cff;
+  border-color: #b224ef;
+  border-radius: 5pt;
+  border: 2pt solid;
+  color: #b224ef;
+}
+
+.delansbtn:hover {
+  background: #cc0e74;
+}
+
+.delansp {
+  font-size: 15pt;
+  font-weight: 600;
+  padding: 2pt 3pt;
+  margin-bottom: -2pt;
+  margin-top: -7pt;
+  color: white;
+}
+
+.addquestionbutton {
+  position: absolute;
+  color: white;
+  background: -webkit-linear-gradient(left, #555cff, #892cdc);
+  border-width: 5pt;
+  border-color: #b224ef;
+  border-radius: 20pt;
+  height: inherit;
+  width: 50pt;
+  height: 30pt;
+  margin: 20pt 24% auto;
+}
+
+.addquestionbutton:hover {
+  background: -webkit-linear-gradient(left, #892cdc, #555cff);
+}
+
+.addquestiontext {
+  font-size: 25pt;
+  font-weight: 900;
+  margin-top: -12pt;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+/* ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+} */
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #555cff;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b224ef;
+}

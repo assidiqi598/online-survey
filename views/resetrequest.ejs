@@ -1,0 +1,49 @@
+<%- include("partials/header") -%>
+
+<link rel="stylesheet" href="/css/resetrequeststyles.css">
+
+</head>
+
+<body>
+  <ul class="nav justify-content-end">
+    <a class="navbar-brand brand" href="/<%=lang%>">Online Survey</a>
+    <li class="nav-item">
+      <a class="nav-link" href="/<%=lang%>/about"><%=version.about%></a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%=version.toggle%>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="/en/resetrequest">EN</a></li>
+        <li><a class="dropdown-item" href="/de/resetrequest">DE</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="container">
+
+
+    <div class="card mb-3">
+      <div class="card-header"><p class="header"><%=version.reset%></p></div>
+      <div class="card-body">
+        <form class="form" action="/<%=lang%>/resetrequest" method="post">
+        <div class="mb-3">
+          <label class="form-label">
+            <span><%=version.emailaddress%></span>
+            <input class="form-control" type=" email" name="email">
+          </label>
+        </div>
+
+        <button type="submit" class="submit btn btn-warning"><%=version.send%></button>
+        <p class="resetemail"><%=version.senddesc%></p>
+        </form>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</body>
+<%- include("partials/footer") -%>

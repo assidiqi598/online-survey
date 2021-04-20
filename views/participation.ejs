@@ -1,0 +1,205 @@
+<%- include("partials/header") -%>
+
+
+<link rel="stylesheet" href="/css/participationstyles.css">
+
+</head>
+
+<body>
+  <ul class="nav justify-content-end sticky">
+    <span class="navbar-brand brand">Online Survey</span>
+    <li class="nav-item">
+      <a class="nav-link" href="/<%=lang%>/about"><%=version.about%></a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%=version.toggle%>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item nav-link" href="/en/participation/<%=user._id%>/<%=survey._id%>">EN</a></li>
+        <li><a class="dropdown-item nav-link" href="/de/participation/<%=user._id%>/<%=survey._id%>">DE</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="linkdiv">
+    <input value="surveyon.f2.htw-berlin.de/<%=lang%>/participation/<%=user._id%>/<%=survey._id%>" class="linkinput">
+    <button onclick="copyLink()" onmouseover="overBtn()" onmouseout="outBtn()" class="btn copybtn">
+      <%=version.copy%>
+    </button>
+    <p class="copytext"></p>
+  </div>
+
+  <% if (msg) { %>
+  <div class="msgdiv">
+    <p class="msgpgph"><%=msg%></p>
+  </div>
+  <% } %>
+
+  <% if (survey.isActive === false) { %>
+  <div class="container">
+    <div class="notactive">
+      <h1><%=version.notactive%></h1>
+    </div>
+  </div>
+
+  <% } else { %>
+
+  <div class="container">
+
+    <div class="title">
+
+      <h1><%=survey.title%></h1>
+      <p><%=survey.description%></p>
+
+    </div>
+
+    <form class="" action="/<%=lang%>/participation/<%=user._id%>/<%=survey._id%>" method="post">
+      <% questions.forEach((question, index) => { %>
+      <% if (answers) { %>
+
+
+      <div class="questiondiv">
+
+        <input type="text" id="<%=index%>" name="questionnumber" value="<%=index%>" style="display: none">
+
+        <% if (question.image) { %>
+        <img src="/images/<%=question.image%>" alt="" class="questionimg">
+        <% } %>
+
+        <h5 style="display: run-in; margin: 20pt auto;"><%=question.text%></h5>
+
+        <% if (question.type === "radiobutton") { %>
+        <% question.radioButtons.forEach((radiobutton, i) => { %>
+
+        <div class="form-check">
+          <input name="radiobtn<%=index%>" value="<%=radiobutton%>"
+          <% for (let j = 0; j < answers.length; j++) { %>
+          <% if (index === j && answers[j].radioButton === radiobutton) { %> checked="checked" <% } %>
+          <% } %>
+          type="radio" class="form-check-input">
+          <div class="form-check-label">
+            <p><%=radiobutton%></p>
+          </div>
+        </div>
+
+        <% }); %>
+
+        <% } else if (question.type === "checkbox") { %>
+        <% question.checkBoxes.forEach((checkbox) => { %>
+        <div class="form-check">
+          <input name="checkbox<%=index%>" value="<%=checkbox%>"
+          <% for (let j = 0; j < answers.length; j++) { %>
+          <% if (index === j) { %>
+            <% answers[j].checkBoxes.forEach((item, i) => { %>
+              <% if (item === checkbox) { %>
+                checked="checked"
+              <% } %>
+            <% }); %>
+          <% } %>
+          <% } %>
+          type="checkbox" class="form-check-input">
+          <div class="form-check-label">
+            <p><%=checkbox%></p>
+          </div>
+        </div>
+        <% }); %>
+
+        <% } else if (question.type === "shortanswer") { %>
+        <textarea name="shortanstext<%=index%>" rows="8" class="shortanstext" value="" placeholder=""><% for (let j = 0; j < answers.length; j++) { %><% if (index === j) { %><%=answers[j].textAnswer%><% } %><% } %></textarea>
+        <% } %>
+
+        <% if (question.isRequired == true) { %>
+        <span style="color: red; position: absolute; right: 10pt; bottom: 5pt"><%=version.required%></span>
+        <% } %>
+
+        <br id="endquestion<%=index%>">
+      </div>
+
+
+      <% } else { %>
+        <div class="questiondiv">
+
+          <input type="text" id="<%=index%>" name="questionnumber" value="<%=index%>" style="display: none">
+
+          <% if (question.image) { %>
+          <img src="/images/<%=question.image%>" alt="" class="questionimg">
+          <% } %>
+
+          <h5 style="display: run-in; margin: 20pt auto;"><%=question.text%></h5>
+
+          <% if (question.type === "radiobutton") { %>
+          <% question.radioButtons.forEach((radiobutton, i) => { %>
+
+          <div class="form-check">
+            <input name="radiobtn<%=index%>" value="<%=radiobutton%>" type="radio" class="form-check-input">
+            <div class="form-check-label">
+              <p><%=radiobutton%></p>
+            </div>
+          </div>
+
+          <% }); %>
+
+          <% } else if (question.type === "checkbox") { %>
+          <% question.checkBoxes.forEach((checkbox) => { %>
+          <div class="form-check">
+            <input name="checkbox<%=index%>" value="<%=checkbox%>" type="checkbox" class="form-check-input">
+            <div class="form-check-label">
+              <p><%=checkbox%></p>
+            </div>
+          </div>
+          <% }); %>
+
+          <% } else if (question.type === "shortanswer") { %>
+          <textarea name="shortanstext<%=index%>" rows="8" class="shortanstext" value="" placeholder=""></textarea>
+          <% } %>
+
+          <% if (question.isRequired == true) { %>
+          <span style="color: red; position: absolute; right: 10pt; bottom: 5pt"><%=version.required%></span>
+          <% } %>
+
+          <br id="endquestion<%=index%>">
+        </div>
+      <% } %>
+      <% }); %>
+
+
+      <button type="submit" class="btn submitbtn"><%=version.submit%></button>
+    </form>
+  </div>
+  <% } %>
+
+  <script type="text/javascript">
+    function copyLink() {
+      const link = document.querySelector('.linkinput');
+
+      console.log(link);
+
+      /* Select the text field */
+      link.select();
+      link.setSelectionRange(0, 99999); /* For mobile devices */
+
+      /* Copy the text inside the text field */
+      document.execCommand("copy");
+
+      const copytext = document.querySelector('.copytext');
+      copytext.innerHTML = "<%=version.copytext%>";
+    }
+
+
+
+    function overBtn() {
+      const copytext = document.querySelector('.copytext');
+      copytext.innerHTML = "<%=version.clipboard%>";
+    }
+
+    function outBtn() {
+      const copytext = document.querySelector('.copytext');
+      copytext.innerHTML = "";
+    }
+  </script>
+
+</body>
+
+
+<%- include("partials/footer") -%>

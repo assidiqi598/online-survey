@@ -1,0 +1,145 @@
+<%- include("partials/header") -%>
+
+<link rel="stylesheet" href="/css/outcomestyles.css">
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.js"></script>
+
+</head>
+
+<body>
+
+  <ul class="nav justify-content-end header sticky">
+    <span class="navbar-brand brand">Online Survey</span>
+
+    <li class="nav-item">
+      <form class="" action="/<%=lang%>/<%=user._id%>/surveys" method="post">
+        <button class="nav-link btn homelink" type="submit">Home</button>
+      </form>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/<%=lang%>/about"><%=version.about%></a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-user-circle"></i>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li>
+          <form class="" action="/<%=lang%>/logout/<%=user._id%>" method="get">
+            <button id="logout" class="dropdown-item nav-link" type="submit"><%=version.logout%></button>
+          </form>
+        </li>
+      </ul>
+    </li>
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%=version.toggle%>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item nav-link" href="/en/result/<%=user._id%>/<%=survey._id%>">EN</a></li>
+        <li><a class="dropdown-item nav-link" href="/de/result/<%=user._id%>/<%=survey._id%>">DE</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="container" style="position: relative">
+    <a href="/<%=lang%>/edit/<%=user._id%>/<%=survey._id%>" class="backBtn"><i class="fas fa-chevron-circle-left"></i></a>
+
+    <div class="resultdiv">
+      <div class="btn-group exportdiv" role="group">
+        <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle exportBtn" data-bs-toggle="dropdown" aria-expanded="false">
+          Export
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+          <li><button class="exportBtns" onclick="exportPdf()">PDF</button></li>
+          <li><button class="exportBtns" onclick="exportImg()">Image</button></li>
+        </ul>
+      </div>
+
+
+      <div id="result">
+        <div class="title">
+
+          <h1><%=survey.title%></h1>
+          <p><%=version.total%> <%=respondents.length%></p>
+        </div>
+
+
+        <% questions.forEach((question, index) => { %>
+
+        <div class="questiondiv" id="qtn<%=index%>">
+          <h6><%=version.question%> <%=index + 1%></h6>
+          <% if (question.image) { %>
+          <img src="/images/<%=question.image%>" alt="" class="questionimg">
+          <% } %>
+          <h5 style="display: run-in; margin: 20pt auto;"><%=question.text%></h5>
+          <input id="type<%=index%>" type="text" value="<%=question.type%>" style="display: none">
+
+          <% if (question.type === "radiobutton") { %>
+            <div class="btn-group selectChart" role="group" aria-label="Basic radio toggle button group">
+              <button onclick="setChart(<%=index%>)" class="btn btn-outline-primary chartBtn" id="pieChart<%=index%>"><i class="fas fa-chart-pie"></i></button>
+              <button onclick="setChart(<%=index%>)" class="btn btn-outline-primary chartBtn" id="barChart<%=index%>"><i class="fas fa-chart-bar"></i></button>
+            </div>
+            <% respondents.forEach(respondent => { %>
+              <% if (respondent.answer[index] !== undefined) { %>
+                <input class="radBtnAns<%=index%>" type="text" value="<%=respondent.answer[index].radioButton%>" style="display: none">
+                <% } %>
+              <% }); %>
+
+              <% question.radioButtons.forEach(radioBtn => { %>
+                <input class="radBtnQtn<%=index%>" type="text" value="<%=radioBtn%>" style="display: none">
+            <% }); %>
+
+          <% } else if (question.type === "checkbox") { %>
+            <div class="btn-group selectChart" role="group" aria-label="Basic radio toggle button group">
+              <button onclick="setChart(<%=index%>)" class="btn btn-outline-primary chartBtn" id="pieChart<%=index%>"><i class="fas fa-chart-pie"></i></button>
+              <button onclick="setChart(<%=index%>)" class="btn btn-outline-primary chartBtn" id="barChart<%=index%>"><i class="fas fa-chart-bar"></i></button>
+            </div>
+            <% respondents.forEach(respondent => { %>
+              <% if (respondent.answer[index] !== undefined) { %>
+                <% respondent.answer[index].checkBoxes.forEach(check => { %>
+                  <input class="checkBoxAns<%=index%>" type="text" value="<%=check%>" style="display: none">
+                <% }); %>
+              <% } %>
+            <% }); %>
+
+            <% question.checkBoxes.forEach(checkBox => { %>
+              <input class="checkBoxQtn<%=index%>" type="text" value="<%=checkBox%>" style="display: none">
+            <% }); %>
+
+          <% } else if (question.type === "shortanswer") { %>
+            <% respondents.forEach(respondent => { %>
+              <% if (respondent.answer[index] !== undefined) { %>
+                <div class="shortAnsDiv">
+                  <span><%=respondent.answer[index].textAnswer%></span>
+                </div>
+              <% } %>
+            <% }); %>
+          <% } %>
+
+          <div id="question<%=index%>" class="pie">
+
+          </div>
+
+          <table id="table<%=index%>">
+
+          </table>
+        </div>
+
+        <% }); %>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="footer">
+    <p class="footerpar">© Fachübergreifendes Projekt 2020/2021</p>
+  </div>
+  <script src="/javascript/outcomescript.js" charset="utf-8"></script>
+</body>
+
+<%- include("partials/footer") -%>

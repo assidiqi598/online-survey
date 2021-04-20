@@ -1,0 +1,43 @@
+<%- include("partials/header") -%>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="/css/aboutstyles.css">
+</head>
+
+<body>
+  <ul class="nav justify-content-end">
+    <a class="navbar-brand brand" href="/<%=lang%>">Online Survey</a>
+    <li class="nav-item">
+      <a class="nav-link" href="/<%=lang%>/about"><%=version.about%></a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%=version.toggle%>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item nav-link" href="/en/about">EN</a></li>
+        <li><a class="dropdown-item nav-link" href="/de/about">DE</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="container about-section">
+    <h1><%=version.aboutus%></h1>
+    <p><%=version.description%></p>
+    <p><%=version.member%></p>
+    <ul>
+      <li>Verbena Haritzah Assidiqi</li>
+      <li>Asyncrite Simo Simo</li>
+      <li>Ariol Jospin Tsadjeu</li>
+    </ul>
+  </div>
+
+
+
+</body>
+
+
+
+
+<%- include("partials/footer") -%>

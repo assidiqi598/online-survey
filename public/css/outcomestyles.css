@@ -1,0 +1,209 @@
+body {
+  overflow-x: hidden;
+}
+
+.nav {
+  background: -webkit-linear-gradient(left, #555cff, #892cdc);
+  height: 40pt;
+  z-index: 10;
+}
+
+.nav-link:hover {
+  color: #b224ef;
+}
+
+.nav-link {
+  font-weight: 100;
+  color: white;
+  font-size: 16pt;
+}
+
+.dropdown-menu {
+  background: #555cff;
+}
+
+.brand {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18pt;
+  font-weight: 200;
+  padding: 0;
+  margin: auto auto auto 15px;
+  color: white;
+}
+
+.brand:hover {
+  cursor: default;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .container {
+  padding-top: 30px;
+}
+
+.container {
+  background-color: #E3F2FD;
+  position: relative;
+  bottom: 80pt;
+  padding: 20pt 30pt;
+  margin-top: 140pt;
+  border-radius: 20pt;
+  width: 55%;
+}
+
+.exportdiv {
+  position: absolute;
+  right: 10pt;
+  top: 25pt;
+  z-index: 3;
+}
+
+.exportBtn {
+  background: #555cff;
+  border: none;
+  color: white;
+  font-size: 18px;
+}
+
+.exportBtn:hover {
+  background: #b224ef;
+  color: white;
+}
+
+.exportBtns {
+  width: 150pt;
+  border: none;
+  background-color: #555cff;
+  color: white;
+  font-weight: lighter;
+  font-size: 18px;
+}
+
+.exportBtns:hover {
+  background-color: white;
+  color: #b224ef;
+}
+
+.selectChart {
+  position: absolute;
+  right: 30pt;
+  top: 35pt;
+  z-index: 3;
+}
+
+.chartBtn {
+  font-size: 17px;
+}
+
+.chartBtn:hover {
+  background-color: #555cff;
+}
+
+.btn-outline-primary {
+  color: #555cff;
+}
+
+
+
+.backBtn .fas {
+  position: fixed;
+  left: 2%;
+  top: 50%;
+  z-index: 10;
+  font-size: 6rem;
+}
+
+@media only screen and (max-width: 1500px) {
+  .backBtn .fas {
+    font-size: 5rem;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .backBtn .fas {
+    font-size: 4rem;
+  }
+}
+
+.resultdiv {
+  background-color: #E3F2FD;
+  position: relative;
+}
+
+#result {
+  background-color: #E3F2FD;
+}
+
+.questiondiv {
+  position: relative;
+  background-color: #bedcfa;
+  border-radius: 15px;
+  margin: 20px 0 0 0;
+  padding: 10pt;
+}
+
+.questionimg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.pie {
+  position: relative;
+}
+
+.shortAnsDiv {
+  background-color: #90CAF9;
+  padding: 5pt;
+  border-radius: 10pt;
+  margin-bottom: 5pt;
+}
+
+td {
+  padding: 8px;
+}
+
+.footer {
+  background: linear-gradient(to left, #33ccff 0%, #9933cc 100%);
+  color: #ffffff;
+  text-align: center;
+  font-size: 30px;
+  padding: 15px;
+  position: relative;
+  margin-top: 50pt;
+  width: 100%;
+  height: 100pt;
+}
+
+.footerpar {
+  margin-top: 20pt;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+/* ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+} */
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #555cff;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b224ef;
+}

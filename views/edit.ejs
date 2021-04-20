@@ -1,0 +1,391 @@
+<%- include("partials/header") -%>
+
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Ubuntu" rel="stylesheet">
+<link rel="stylesheet" href="/css/editstyles.css">
+
+
+</head>
+
+<body>
+
+  <ul class="nav justify-content-end header sticky">
+    <span class="navbar-brand brand">Online Survey</span>
+
+    <li class="nav-item">
+      <form class="" action="/<%=lang%>/edit/<%=user._id%>/<%=survey._id%>/tohome" method="post">
+        <button class="nav-link btn homelink" type="submit">Home</button>
+      </form>
+    </li>
+    <li class=" nav-item">
+      <a class="nav-link" href="/<%=lang%>/about"><%=version.about%></a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-user-circle"></i>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li>
+          <form class="" action="/<%=lang%>/edit/<%=user._id%>/<%=survey._id%>/logout" method="post">
+            <button id="logout" class="dropdown-item nav-link" type="submit"><%=version.logout%></button>
+          </form>
+        </li>
+      </ul>
+    </li>
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%=version.toggle%>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item nav-link" href="/en/edit/<%=user._id%>/<%=survey._id%>">EN</a></li>
+        <li><a class="dropdown-item nav-link" href="/de/edit/<%=user._id%>/<%=survey._id%>">DE</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <% if (msg) { %>
+  <div class="warning">
+    <form class="" action="/<%=lang%>/<%=user._id%>/surveys" method="post">
+      <p class="msg">
+        <%=msg%>
+        <button type="submit" class="btn msganswer"><%=version.yes%></button>
+        <a href="/<%=lang%>/edit/<%=user._id%>/<%=survey._id%>" class="btn msganswer"><%=version.no%></a>
+      </p>
+    </form>
+  </div>
+  <% } %>
+
+  <% if (logoutmsg) { %>
+  <div class="warning">
+    <p class="msg">
+      <%=logoutmsg%>
+      <a href="/<%=lang%>/logout/<%=user._id%>" class="btn msganswer"><%=version.yes%></a>
+      <a href="/<%=lang%>/edit/<%=user._id%>/<%=survey._id%>" class="btn msganswer"><%=version.no%></a>
+    </p>
+  </div>
+  <% } %>
+
+
+
+  <div class="row">
+    <div class="col-3 col-s-3">
+      <div class="leftmenudiv">
+        <form target="_blank" action="/<%=lang%>/edit/<%=user._id%>/<%=survey._id%>/newsurvey" method="post">
+          <button class="btn leftmenu" type="submit">
+            <%=version.new%>
+          </button>
+        </form>
+        <button type="submit" name="button" class="btn leftmenu" onclick="saveSurvey()"><%=version.save%></button>
+        <form target="_blank" action="/<%=lang%>/participation/<%=user._id%>/<%=survey._id%>/activate" method="post">
+          <button class="btn leftmenu" type="submit"><%=version.share%></button>
+        </form>
+        <form target="_blank" action="/<%=lang%>/participation/<%=user._id%>/<%=survey._id%>/inactivate" method="post">
+          <button class="btn leftmenu" type="submit"><%=version.inactivate%></button>
+        </form>
+        <form action="/<%=lang%>/edit/<%=user._id%>/<%=survey._id%>/deletesurvey" method="post">
+          <button class="btn leftmenu" type="submit"><%=version.delete%></button>
+        </form>
+        <form action="/<%=lang%>/result/<%=user._id%>/<%=survey._id%>" method="get">
+          <button class="btn leftmenu" type="submit"><%=version.result%></button>
+        </form>
+      </div>
+
+    </div>
+
+
+    <div class="col-6 col-s-6">
+
+      <form class="surveyform" action="/<%=lang%>/edit/<%=user._id%>/<%=survey._id%>/save" method="post">
+        <div class="title">
+          <legend><%=version.form%></legend>
+
+          <label class="labels" for="fname"><%=version.title%></label>
+          <input class="survey-title-input inputtext" type="text" id="fname" name="title" value="<%=survey.title%>" onchange="this.form.submit()" placeholder="<%=version.enteryourtitle%>">
+          <label class="labels"><%=version.description%></label>
+          <textarea class="survey-description-input inputtext" type="text" name="description" onchange="this.form.submit()" placeholder="<%=version.enteryourdescription%>" rows="7" cols="50" maxlength="6000"><%=survey.description%></textarea>
+
+
+        </div>
+
+
+
+
+        <% questions.forEach((question, index) => { %>
+
+        <div class="questiondiv">
+
+          <label class="labels"><%=version.question%> <%=index + 1%></label>
+          <input type="text" id="<%=index%>" name="questionnumber" value="<%=index%>" style="display: none">
+          <button class="delbutton" onclick="deleteQuestion(<%=index%>)" type="button">
+            <p class="delp">x</p>
+          </button>
+          <textarea class="questiontextarea inputtext" name="questiontext" placeholder="<%=version.enteryourquestion%>" rows="4" value=""><%=question.text%></textarea>
+
+          <div id="imgdiv<%=index%>">
+          <input id="img<%=index%>" type="text" name="image"
+          <% if (question.image) { %>
+            value="<%=question.image%>"
+          <% } else { %>
+            value=""
+          <% } %>
+          style="display: none;">
+          <% if (question.image) { %>
+              <img src="/images/<%=question.image%>" alt="" style="display: block; margin-left: auto; margin-right: auto; width: 80%;">
+
+              <button class="delimgbtn" onclick="deleteimg(<%=index%>)" type="button">
+                <p class="delp">x</p>
+              </button>
+          <% } %>
+          </div>
+
+          <select id="resp-type-select<%=index%>" onchange="addAnswerButton(<%=index%>)" name="answertype" class="combo">
+            <% if (question.type === "radiobutton") { %>
+            <option value="select"><%=version.select%></option>
+            <option selected value="radiobutton">Radio Button</option>
+            <option value="checkbox">Check Box</option>
+            <option value="shortanswer"><%=version.shortanswer%></option>
+            <% } else if (question.type === "checkbox") { %>
+            <option value="select"><%=version.select%></option>
+            <option value="radiobutton">Radio Button</option>
+            <option selected value="checkbox">Check Box</option>
+            <option value="shortanswer"><%=version.shortanswer%></option>
+            <% } else if (question.type === "shortanswer") { %>
+            <option value="select"><%=version.select%></option>
+            <option value="radiobutton">Radio Button</option>
+            <option value="checkbox">Check Box</option>
+            <option selected value="shortanswer"><%=version.shortanswer%></option>
+            <% } else { %>
+            <option selected value="select"><%=version.select%></option>
+            <option value="radiobutton">Radio Button</option>
+            <option value="checkbox">Check Box</option>
+            <option value="shortanswer"><%=version.shortanswer%></option>
+            <% } %>
+          </select>
+
+          <button id="add-ans-btn<%=index%>" onclick="addAnswer(<%=index%>)" type="button" class="addanswerbutton" <% if (question.type === "radiobutton" || question.type === "checkbox") { %> style="visibility: visible" <% } else { %>
+            style="visibility: collapse" <% } %>><%=version.addanswer%></button>
+
+
+          <% if (question.type === "radiobutton") { %>
+          <% question.radioButtons.forEach((radiobutton, i) => { %>
+          <div id="<%=index%><%=i%>" class="form-check">
+            <input id="radiobtn<%=index%>" type="radio" class="form-check-input">
+            <textarea class="form-check-label inputtext" name="radiobtntext<%=index%>" value="" placeholder="<%=version.addanswer%>"><%=radiobutton%></textarea>
+            <button class="delansbtn" onclick="deleteAnswer(<%=index%>, <%=i%>)" type="button">
+              <p class="delansp">x</p>
+            </button>
+          </div>
+
+          <% }); %>
+
+          <% } else if (question.type === "checkbox") { %>
+          <% question.checkBoxes.forEach((checkbox, i) => { %>
+          <div id="<%=index%><%=i%>" class="form-check">
+            <input id="checkbox<%=index%>" type="checkbox" class="form-check-input">
+            <textarea class="form-check-label inputtext" name="checkboxtext<%=index%>" value="" placeholder="<%=version.addanswer%>"><%=checkbox%></textarea>
+            <button class="delansbtn" onclick="deleteAnswer(<%=index%>, <%=i%>)" type="button">
+              <p class="delansp">x</p>
+            </button>
+          </div>
+          <% }); %>
+
+          <% } else if (question.type === "shortanswer") { %>
+          <p id="shortanswer<%=index%>">Short answer text</p>
+          <% } %>
+
+          <br id="endquestion<%=index%>" />
+
+          <div class="form-check form-switch">
+            <span class="form-check-label switchtext"><%=version.required%></span>
+            <input class="form-check-input" name="required<%=index%>" style="position: absolute; margin: 5pt auto auto 5pt;" type="checkbox"
+            <% if (question.isRequired == true) { %>
+              checked
+            <% } %>>
+          </div>
+        </div>
+
+
+        <% }); %>
+
+        <div id="addquestion">
+
+          <button type="button" class="addquestionbutton">
+            <p class="addquestiontext">+</p>
+          </button>
+
+        </div>
+      </form>
+
+
+
+
+    </div>
+
+
+
+    <div class="col-3 col-s-12">
+      <div id="aside" class="asidetop">
+        <% user.surveys.forEach((item) => { %>
+
+        <form target="_blank" action="/<%=lang%>/edit/<%=user._id%>/<%=item._id%>" method="post">
+          <button type="submit" name="button" class="surveylist">
+            <%=item.title%>
+          </button>
+        </form>
+
+        <% }); %>
+      </div>
+    </div>
+
+    <div class="col-3 col-s-12">
+      <div class="asidebottom">
+
+        <% if (questions[0]) { %>
+          <p class="uploadtext"><%=version.upload%></p>
+        <% } %>
+
+        <% questions.forEach((item, i) => { %>
+        <div class="uploaddiv<%=i%> uploaddiv">
+          <form action="/<%=lang%>/edit/<%=user._id%>/<%=survey._id%>/upload" method="post" enctype="multipart/form-data">
+            <span class="uploadnumber"><%=version.question%> <%=i + 1%></span>
+            <input type="text" name="number" value="<%=i%>" style="display: none">
+            <input type="file" name="file" accept="image/*" class="fileinput" onchange="this.form.submit()">
+          </form>
+        </div>
+
+
+        <% }); %>
+
+        <br id="endasidebottom">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+    <p class="footerpar">© Fachübergreifendes Projekt 2020/2021</p>
+  </div>
+
+
+
+  <script type="text/javascript">
+
+    document.querySelector('.addquestionbutton').addEventListener("click", function(e) {
+      e.preventDefault();
+      const currentQuestions = document.querySelectorAll('.delbutton');
+      let questionNumber = currentQuestions.length;
+      console.log(questionNumber);
+
+      let newDiv = document.createElement('div');
+      newDiv.className = 'questiondiv';
+
+      const questionLabel = questionNumber + 1;
+
+      newDiv.innerHTML =
+        '<label class="labels"><%=version.question%> ' + questionLabel + '</label>' +
+        '<input type="text" id="' + questionNumber + '" name="questionnumber" value="' + questionNumber + '" style="display: none">' +
+
+        '<button class="delbutton" onclick="deleteQuestion(' + questionNumber + ')" type="button">' +
+        '<p class="delp">x</p>' +
+        '</button>' +
+
+        '<textarea class="questiontextarea inputtext" name="questiontext" placeholder="<%=version.enteryourquestion%>" rows="4" value=""></textarea>' +
+
+        '<select id="resp-type-select' + questionNumber + '" onchange="addAnswerButton(' + questionNumber + ')" name="answertype" class="combo">' +
+        '<option selected value="select"><%=version.select%></option>' +
+        '<option value="radiobutton">Radio Button</option>' +
+        '<option value="checkbox">Check Box</option>' +
+        '<option value="shortanswer"><%=version.shortanswer%></option> ' +
+        '</select>' +
+
+        '<button id="add-ans-btn' + questionNumber + '" onclick="addAnswer(' + questionNumber + ')" type="button" class="addanswerbutton" style="visibility: collapse"><%=version.addanswer%></button>' +
+
+        '<br id="endquestion' + questionNumber + '" />' +
+
+        '<div class="form-check form-switch">' +
+        '<span class="form-check-label switchtext"><%=version.required%></span>' +
+        '<input class="form-check-input" name="required' + questionNumber + '" style="position: absolute; margin: 5pt auto auto 5pt;" type="checkbox">' +
+        '</div>';
+
+
+      const surveyForm = document.querySelector('.surveyform');
+      const addQuestion = document.querySelector('#addquestion');
+
+      surveyForm.insertBefore(newDiv, addQuestion);
+
+      // let newUploadDiv = document.createElement('form');
+      // newUploadDiv.className = "uploaddiv";
+      //
+      // newUploadDiv.innerHTML =
+      //   '<form action="" method="post" enctype="multipart/form-data">' +
+      //     '<span class="uploadnumber"> ' + questionLabel + '</span>' +
+      //     '<input type="text" name="number" value="' + questionNumber + '" style="display: none">' +
+      //     '<input type="file" name="file" accept="image/*" class="fileinput" onchange="this.form.submit()">' +
+      //   '</form>';
+      //
+      // const asideBottom = document.querySelector('.asidebottom');
+      // const endAsideBottom = document.querySelector('#endasidebottom');
+      //
+      // asideBottom.insertBefore(newUploadDiv, endAsideBottom);
+
+      questionNumber++;
+    });
+
+    function addAnswer(number) {
+      console.log(number);
+
+      const respTypeSelect = document.getElementById('resp-type-select' + number);
+      if (respTypeSelect.value === "radiobutton") {
+        let radioBtnsLength = 0;
+        if (document.querySelector('#radiobtn' + number)) {
+          radioBtnsLength = document.querySelectorAll('#radiobtn' + number).length;
+        }
+        console.log("radiobtnslength= " + radioBtnsLength);
+        let newDiv = document.createElement('div')
+        newDiv.id = number + "" + radioBtnsLength;
+        newDiv.className = "form-check";
+        newDiv.innerHTML =
+          '<input id="radiobtn' + number + '" type="radio" class="form-check-input">' +
+          '<textarea class="form-check-label inputtext" name="radiobtntext' + number + '" value="" placeholder="<%=version.addanswer%>"></textarea>' +
+          '<button class="delansbtn" onclick="deleteAnswer(' + number + ',' + radioBtnsLength + ')" type="button">' +
+          '<p class="delansp">x</p>' +
+          '</button>';
+
+        const question = document.getElementById(number).parentNode;
+        const endquestion = document.getElementById('endquestion' + number);
+
+        question.insertBefore(newDiv, endquestion);
+      } else {
+        let checkBoxesLength = 0;
+        if (document.querySelector('#checkbox' + number)) {
+          checkBoxesLength = document.querySelectorAll('#checkbox' + number).length;
+        }
+        console.log("checkboxexlength= " + checkBoxesLength);
+        let newDiv = document.createElement('div')
+        newDiv.id = number + "" + checkBoxesLength;
+        newDiv.className = "form-check";
+        newDiv.innerHTML =
+          '<input id="checkbox' + number + '" type="checkbox" class="form-check-input">' +
+          '<textarea class="form-check-label inputtext" name="checkboxtext' + number + '" value="" placeholder="<%=version.addanswer%>"></textarea>' +
+          '<button class="delansbtn" onclick="deleteAnswer(' + number + ',' + checkBoxesLength + ')" type="button">' +
+          '<p class="delansp">x</p>' +
+          '</button>';
+
+        const question = document.getElementById(number).parentNode;
+        const endquestion = document.getElementById('endquestion' + number);
+
+        question.insertBefore(newDiv, endquestion);
+      }
+    }
+  </script>
+
+  <script src="/javascript/editscript.js" charset="utf-8"></script>
+
+
+</body>
+
+<%- include("partials/footer") -%>

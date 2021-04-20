@@ -1,0 +1,47 @@
+body {
+  overflow-x: hidden;
+}
+
+.nav {
+  background: -webkit-linear-gradient(left, #555cff, #892cdc);
+  height: 5%;
+}
+
+.nav-link:hover {
+  color: #b224ef
+}
+
+.nav-link {
+  font-weight: 100;
+  color: white;
+  font-size: 16pt;
+}
+
+.dropdown-menu {
+  background: #555cff;
+}
+
+.brand {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18pt;
+  font-weight: 200;
+  padding: 0;
+  margin: auto auto auto 15px;
+  color: white;
+}
+
+.brand:hover {
+  cursor: default;
+}
+
+.thanksdiv {
+  background-color: #555cff;
+  margin: 10% auto;
+  padding: 50pt;
+  border-radius: 40pt;
+}
+
+.thankstext {
+  color: white;
+  font-size: 100pt;
+}

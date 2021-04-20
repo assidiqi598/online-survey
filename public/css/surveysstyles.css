@@ -1,0 +1,257 @@
+body {
+  overflow-x: hidden;
+}
+
+.nav {
+  background: -webkit-linear-gradient(left, #555cff, #892cdc);
+  height: 40pt;
+  width: 100%;
+  z-index: 9999;
+}
+
+.links {
+  display: flex;
+  list-style: none;
+  width: 50%;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+}
+
+.nav-link:hover {
+  color: #b224ef
+}
+
+.nav-link {
+  font-weight: 100;
+  color: white;
+  font-size: 16pt;
+}
+
+.dropdown-menu {
+  background: #555cff;
+}
+
+.brand {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18pt;
+  font-weight: 200;
+  padding: 0;
+  margin: 7px auto auto 15px;
+  color: white;
+  cursor: default;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+.sticky+.row {
+  padding-top: 60px;
+}
+
+.row {
+  background-image: url("https://images.freeimages.com/images/large-previews/111/nyc-1219589.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: repeat-y;
+  width: 103%;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col {
+  background-color: #bedcfa;
+  margin: 50pt 60pt 50pt;
+  border-radius: 20pt;
+  text-align: center;
+  height: 80%;
+}
+
+.leftcol {
+  overflow-y: auto;
+  flex-basis: 400px;
+}
+
+.rightcol {
+  position: relative;
+  flex-basis: 400px;
+}
+
+.surveylist {
+  margin: 10% auto;
+}
+
+.surveytitle {
+  text-decoration: none;
+  color: #555cff;
+  background-color: #a7c5eb;
+  width: 80%;
+  font-size: 20pt;
+  font-weight: 500;
+  margin-bottom: 30pt;
+}
+
+.surveytitle:hover {
+  color: #e6739f;
+  background-color: #555cff;
+}
+
+.createnewbtn {
+  color: #555cff;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+}
+
+.createnewbtn:hover {
+  color: #b224ef;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+/* ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+} */
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #555cff;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b224ef;
+}
+
+@media (max-width: 1090px) {
+  .row {
+    height: 200vh;
+  }
+
+  .col {
+    height: 40%;
+  }
+}
+
+@media (max-device-width: 768px) {
+  nav {
+    position: relative;
+  }
+
+  .nav {
+    height: 65pt;
+  }
+
+  .brand {
+    font-size: 2.5rem;
+  }
+
+  .line {
+    width: 50px;
+    height: 5px;
+    background: white;
+    margin: 7px;
+    top: 10px;
+  }
+
+  .hamburger {
+    position: absolute;
+    cursor: pointer;
+    right: 5%;
+    top: 50%;
+    transform: translate(-5%, -50%);
+    z-index: 2;
+  }
+
+  .links {
+    position: fixed;
+    background: #555cff;
+    height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    clip-path: circle(100px at 90% -11%);
+    -webkit-clip-path: circle(100px at 90% -11%);
+    transition: all 1s ease-out;
+    pointer-events: none;
+  }
+
+  .links.open {
+    clip-path: circle(2500px at 90% -11%);
+    -webkit-clip-path: circle(2500px at 90% -11%);
+    pointer-events: all;
+  }
+
+  .nav-link {
+    font-size: 4rem;
+  }
+
+  .links li {
+    opacity: 0;
+  }
+
+  .links li:nth-child(1) {
+    transition: all 0.5s ease 0.2s;
+  }
+
+  .links li:nth-child(2) {
+    transition: all 0.5s ease 0.4s;
+  }
+
+  .links li:nth-child(3) {
+    transition: all 0.5s ease 0.6s;
+  }
+
+  .links li:nth-child(4) {
+    transition: all 0.5s ease 0.8s;
+  }
+
+  li.fade {
+    opacity: 1;
+  }
+
+  .fade:not(.show) {
+    opacity: 1;
+  }
+
+  .row {
+    height: 105vh;
+  }
+
+  .col {
+    height: 40%;
+  }
+
+  .rightcol {
+    margin-top: 0;
+  }
+
+  .leftcol {
+    margin-bottom: 0;
+  }
+
+  .surveytitle {
+    font-size: 3rem;
+  }
+
+  .createnewbtn {
+    font-size: 3rem;
+  }
+}

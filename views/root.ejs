@@ -1,0 +1,118 @@
+<%- include("partials/header") -%>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/css/rootstyles.css">
+
+
+</head>
+
+<body>
+
+  <ul class="nav justify-content-end">
+    <span class="navbar-brand brand">Online Survey</span>
+    <li class="nav-item">
+      <a class="nav-link" href="/<%=lang%>/about"><%=version.about%></a>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <%=version.toggle%>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item nav-link" href="/en">EN</a></li>
+        <li><a class="dropdown-item nav-link" href="/de">DE</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <% if (message) { %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong><%=message%></strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% } %>
+
+
+  <div class="mainpart">
+    <div class="cont">
+      <form action="/<%=lang%>/login" method="post">
+        <div class="form sign-in">
+          <h2><%=version.signin%></h2>
+          <label>
+            <span><%=version.emailaddress%></span>
+            <input type="email" name="emailsignin">
+          </label>
+          <label>
+            <span><%=version.password%></span>
+            <input type="password" name="passwordsignin">
+          </label>
+          <button type="submit" class="submit""><%=version.signin%></button>
+          <a class="forgot-pass" href="/<%=lang%>/resetrequest"><%=version.forgotpassword%></a>
+
+        </div>
+      </form>
+
+
+      <div class="sub-cont">
+        <div class="img">
+          <div class="img-text m-up">
+            <h2><%=version.newhere%></h2>
+            <p><%=version.newheredesc%></p>
+          </div>
+          <div class="img-text m-in">
+            <h2><%=version.oneofus%></h2>
+            <p><%=version.oneofusdesc%></p>
+          </div>
+          <div class="img-btn">
+            <span class="m-up"><%=version.signup%></span>
+            <span class="m-in"><%=version.signin%></span>
+          </div>
+        </div>
+
+        <form action="/<%=lang%>/register" method="post">
+          <div class="form sign-up">
+            <h2><%=version.signup%></h2>
+            <label>
+              <span>Name</span>
+              <input type="text" name="name">
+            </label>
+            <label>
+              <span><%=version.emailaddress%></span>
+              <input type="email" name="email">
+            </label>
+            <label>
+              <span><%=version.password%></span>
+              <input type="password" name="password">
+            </label>
+            <label>
+              <span><%=version.confirmpassword%></span>
+              <input type="password" name="confirmpassword">
+            </label>
+            <button type="submit" class="submit"><%=version.signupnow%></button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- I tried to load this script from as an external javascript file. But it didn't work. It works okay if I put it in this file. -->
+  <script type="text/javascript">
+    document.querySelector('.img-btn').addEventListener('click', function() {
+      document.querySelector('.cont').classList.toggle('s-signup')
+    });
+  </script>
+
+  <script type="text/javascript">
+    var alertList = document.querySelectorAll('.alert')
+    alertList.forEach(function(alert) {
+      new bootstrap.Alert(alert)
+    })
+  </script>
+
+
+</body>
+
+
+<%- include("partials/footer") -%>

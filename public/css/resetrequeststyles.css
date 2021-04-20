@@ -1,0 +1,66 @@
+body {
+  overflow-x: hidden;
+}
+
+.nav {
+  background: -webkit-linear-gradient(left, #555cff, #892cdc);
+  height: 40pt;
+}
+
+a:hover {
+  color: #b224ef
+}
+
+.nav-link {
+  font-weight: 100;
+  color: white;
+}
+
+.brand {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 200;
+  padding: 0;
+  margin: auto auto auto 15px;
+  color: white;
+}
+
+.card {
+  margin: 8% auto auto;
+  border-radius: 20px;
+  border-width: 0.5px;
+  box-shadow: 5px 10px #583d72;
+  border-color: #9d0191;
+  max-width: 21rem;
+}
+
+.card-header:first-child {
+  padding-left: auto;
+  padding-right: auto;
+  align-items:stretch;
+  background: -webkit-linear-gradient(left, #555cff, #892cdc);
+  color: white;
+  border-top-left-radius: 17px;
+  border-top-right-radius: 17px;
+}
+
+.header {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 1.5rem;
+}
+
+.resetemail {
+  text-align: center;
+  margin: 30px auto auto;
+  font-size: 0.5rem;
+}
+
+.form-label {
+  width: 380px;
+}
+
+.submit {
+  margin: 50px 90px 10px;
+  width: 200px;
+}
